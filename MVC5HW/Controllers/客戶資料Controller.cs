@@ -20,6 +20,12 @@ namespace MVC5HW.Controllers
             return View(db.客戶資料.ToList());
         }
 
+        // GET: 客戶相關資料數量
+        public ActionResult Counts()
+        {
+            return View(db.客戶相關資訊數量.ToList());
+        }
+
         // GET: 客戶資料/Details/5
         public ActionResult Details(int? id)
         {
