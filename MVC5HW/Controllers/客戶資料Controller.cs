@@ -15,9 +15,16 @@ namespace MVC5HW.Controllers
         private 客戶資料Entities db = new 客戶資料Entities();
 
         // GET: 客戶資料
-        public ActionResult Index()
+        public ActionResult Index(string search)
         {
-            return View(db.客戶資料.ToList());
+            var data = db.客戶資料.AsQueryable();
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                data = data.Where(p => p.客戶名稱.Contains(search));
+            }
+
+            return View(data);
         }
 
         // GET: 客戶相關資料數量
