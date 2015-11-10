@@ -179,6 +179,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\手機電話格式.cs" />
     <Compile Include="Models\Custom.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
