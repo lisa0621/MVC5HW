@@ -28,6 +28,7 @@ namespace MVC5HW.Models
         public string 傳真 { get; set; }
         public string 地址 { get; set; }
         public string Email { get; set; }
+        public bool 是否已刪除 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<客戶銀行資訊> 客戶銀行資訊 { get; set; }

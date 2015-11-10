@@ -19,6 +19,8 @@ namespace MVC5HW.Controllers
         {
             var data = db.客戶銀行資訊.Include(客 => 客.客戶資料).AsQueryable();
 
+            data = data.Where(p => p.是否已刪除 == false);
+
             if (!String.IsNullOrEmpty(search))
             {
                 data = data.Where(p => p.銀行名稱.Contains(search));
@@ -121,7 +123,9 @@ namespace MVC5HW.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             客戶銀行資訊 客戶銀行資訊 = db.客戶銀行資訊.Find(id);
-            db.客戶銀行資訊.Remove(客戶銀行資訊);
+            客戶銀行資訊.是否已刪除 = true;
+
+            //db.客戶銀行資訊.Remove(客戶銀行資訊);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -20,6 +20,8 @@ namespace MVC5HW.Controllers
         {
             var data = db.客戶聯絡人.Include(客 => 客.客戶資料).AsQueryable();
 
+            data = data.Where(p => p.是否已刪除 == false);
+
             if (!String.IsNullOrEmpty(search))
             {
                 data = data.Where(p => p.姓名.Contains(search));
@@ -130,7 +132,9 @@ namespace MVC5HW.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             客戶聯絡人 客戶聯絡人 = db.客戶聯絡人.Find(id);
-            db.客戶聯絡人.Remove(客戶聯絡人);
+            客戶聯絡人.是否已刪除 = true;
+
+            //db.客戶聯絡人.Remove(客戶聯絡人);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

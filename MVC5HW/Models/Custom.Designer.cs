@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'c:\Users\lisa7\Documents\Visual Studio 2015\Projects\MVC5HW\MVC5HW\Models\Custom.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\lisa7\documents\visual studio 2015\Projects\MVC5HW\MVC5HW\Models\Custom.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
