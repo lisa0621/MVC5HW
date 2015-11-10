@@ -57,6 +57,14 @@ namespace MVC5HW.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,客戶Id,職稱,姓名,Email,手機,電話")] 客戶聯絡人 客戶聯絡人)
         {
+
+            var isRepeat = db.客戶聯絡人.Where(p => p.客戶Id == 客戶聯絡人.客戶Id & p.Email == 客戶聯絡人.Email).Any();
+
+            if (isRepeat)
+            {
+                ModelState.AddModelError("Email", "Email 不能重複");
+            }
+
             if (ModelState.IsValid)
             {
                 db.客戶聯絡人.Add(客戶聯絡人);
