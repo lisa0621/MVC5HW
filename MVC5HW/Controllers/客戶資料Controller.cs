@@ -16,15 +16,24 @@ namespace MVC5HW.Controllers
         客戶資料Repository repo = RepositoryHelper.Get客戶資料Repository();
 
         // GET: 客戶資料
-        public ActionResult Index(string search)
+        public ActionResult Index(string search, string customType)
         {
+           
             //var data = db.客戶資料.AsQueryable();
             var data = repo.All();
             data = data.Where(p => p.是否已刪除 == false);
 
+            var customTypes = repo.All().Where(p => p.是否已刪除 == false).GroupBy(x => x.客戶分類).Select(g => g.FirstOrDefault());
+            ViewBag.客戶分類 = new SelectList(customTypes, "客戶分類", "客戶分類");
+
             if (!String.IsNullOrEmpty(search))
             {
                 data = data.Where(p => p.客戶名稱.Contains(search));
+            }
+
+            if (!String.IsNullOrEmpty(customType))
+            {
+                data = data.Where(p => p.客戶分類==customType);
             }
 
             return View(data);
