@@ -23,8 +23,10 @@ namespace MVC5HW.Controllers
             var data = repo.All();
             data = data.Where(p => p.是否已刪除 == false);
 
-            var customTypes = repo.All().Where(p => p.是否已刪除 == false).GroupBy(x => x.客戶分類).Select(g => g.FirstOrDefault());
-            ViewBag.客戶分類 = new SelectList(customTypes, "客戶分類", "客戶分類");
+            //var customTypes = repo.All().Where(p => p.是否已刪除 == false).GroupBy(x => x.客戶分類).Select(g => g.FirstOrDefault());
+            //ViewBag.客戶分類 = new SelectList(customTypes, "客戶分類", "客戶分類");
+
+            ViewBag.客戶分類 = repo.Get客戶分類資料篩選();
 
             if (!String.IsNullOrEmpty(search))
             {
