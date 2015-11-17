@@ -9,8 +9,21 @@ namespace MVC5HW.Models
     {
     }
     
+    //public partial class 客戶聯絡人MetaData : IValidatableObject
     public partial class 客戶聯絡人MetaData
     {
+
+        //public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        //{
+        //    using (var db = new 客戶資料Entities())
+        //    {
+        //        yield return new ValidationResult() {
+        //           "Email 重複",
+        //           new string[] { "Email" }
+        //        };
+        //    }
+        //}
+
         [Required]
         public int Id { get; set; }
         [Required]
@@ -36,5 +49,7 @@ namespace MVC5HW.Models
         public string 電話 { get; set; }
     
         public virtual 客戶資料 客戶資料 { get; set; }
+
+
     }
 }

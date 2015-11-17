@@ -179,6 +179,41 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\EFRepository.cs">
+      <DependentUpon>IRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EFUnitOfWork.cs">
+      <DependentUpon>IRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IRepository.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IUnitOfWork.cs">
+      <DependentUpon>IRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RepositoryHelper.cs">
+      <DependentUpon>IRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RepositoryIQueryableExtensions.cs">
+      <DependentUpon>IRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagramsRepository.cs">
+      <DependentUpon>IRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\客戶相關資訊數量Repository.cs">
+      <DependentUpon>IRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\客戶聯絡人Repository.cs">
+      <DependentUpon>IRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\客戶資料Repository.cs">
+      <DependentUpon>IRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\客戶銀行資訊Repository.cs">
+      <DependentUpon>IRepository.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\手機電話格式.cs" />
     <Compile Include="Models\Custom.Context.cs">
       <AutoGen>True</AutoGen>
@@ -257,6 +292,10 @@
     <Content Include="Models\EFGeneratePartialClass.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>EFGeneratePartialClass.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\IRepository.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IRepository.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
