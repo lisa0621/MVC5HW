@@ -12,7 +12,7 @@ namespace MVC5HW.Controllers
 {
     public class 客戶資料Controller : Controller
     {
-        //private 客戶資料Entities db = new 客戶資料Entities();
+        private 客戶資料Entities db = new 客戶資料Entities();
         客戶資料Repository repo = RepositoryHelper.Get客戶資料Repository();
 
         // GET: 客戶資料
@@ -161,11 +161,25 @@ namespace MVC5HW.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult JsonIndex()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult JsonTry()
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+            var data = db.客戶資料.Take(2).ToList();
+
+            return Json(data);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                //db.Dispose();
+                db.Dispose();
                 repo.UnitOfWork.Context.Dispose();
             }
             base.Dispose(disposing);

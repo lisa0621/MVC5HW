@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "JsonIndex";
+}
+
+<h2>JsonIndex</h2>
+
+<h2>JsonIndex</h2>
+
+
+<button onclick="GetData()">取得資料</button>
+
+
+<script>
+
+    function GetData(){
+        $.post('/客戶資料/JsonTry', "", function (data) {
+            console.log(data);
+        });
+    }
+
+</script>
