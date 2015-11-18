@@ -179,6 +179,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CustomDetailWithContact.cs" />
     <Compile Include="Models\EFRepository.cs">
       <DependentUpon>IRepository.tt</DependentUpon>
     </Compile>
@@ -369,6 +370,7 @@
     <Content Include="Views\客戶銀行資訊\Index.cshtml" />
     <Content Include="Views\客戶資料\Counts.cshtml" />
     <Content Include="Views\客戶資料\JsonIndex.cshtml" />
+    <Content Include="Views\Shared\Error_DbEntityValidationException.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

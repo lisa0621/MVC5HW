@@ -1,0 +1,12 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "錯誤";
+}
+
+<h1 class="text-danger">使用者輸入資料驗證失敗 @Model.Exception.GetType()</h1>
+<h2 class="text-danger">請回上頁檢查您所輸入的資料</h2>
+
+<pre>@Model.Exception.Message</pre>
+<pre>@Model.Exception.ToString()</pre>
+

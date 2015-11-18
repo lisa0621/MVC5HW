@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVC5HW.Models;
+using System.Data.Entity.Validation;
 
 namespace MVC5HW.Controllers
 {
@@ -14,6 +15,7 @@ namespace MVC5HW.Controllers
     {
         private 客戶資料Entities db = new 客戶資料Entities();
         客戶資料Repository repo = RepositoryHelper.Get客戶資料Repository();
+        客戶聯絡人Repository repoContact = RepositoryHelper.Get客戶聯絡人Repository();
 
         // GET: 客戶資料
         public ActionResult Index(string search, string customType)
@@ -61,7 +63,17 @@ namespace MVC5HW.Controllers
             {
                 return HttpNotFound();
             }
-            return View(客戶資料);
+            //return View(客戶資料);
+
+            var contactsData = repoContact.All().Where(p => p.客戶Id == id);
+
+            CustomDetailWithContact data = new CustomDetailWithContact
+            {
+                custom = 客戶資料,
+                contacts = contactsData
+            };
+
+            return View(data);
         }
 
         // GET: 客戶資料/Create
@@ -109,11 +121,14 @@ namespace MVC5HW.Controllers
         // POST: 客戶資料/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HandleError(ExceptionType = typeof(DbEntityValidationException), View = "Error_DbEntityValidationException")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         //public ActionResult Edit([Bind(Include = "Id,客戶名稱,客戶分類,統一編號,電話,傳真,地址,Email")] 客戶資料 客戶資料)
         public ActionResult Edit(int? id, FormCollection form)
         {
+            throw new DbEntityValidationException();
+
             客戶資料 客戶資料 = repo.GetByID(id);
             var includeProperties = "Id,客戶名稱,客戶分類,統一編號,電話,傳真,地址,Email".Split(',');
             if (TryUpdateModel<客戶資料>(客戶資料, includeProperties))
