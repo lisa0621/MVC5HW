@@ -136,6 +136,16 @@ namespace MVC5HW.Controllers
             return View(data);
         }
 
+        [HttpPost]
+        public ActionResult Details(FormCollection form)
+        {
+            IList<客戶聯絡人> data = new List<客戶聯絡人>();
+            if (TryUpdateModel<IList<客戶聯絡人>>(data, "data"))
+            {
+            }
+                return View();
+        }
+
         // GET: 客戶資料/Create
         public ActionResult Create()
         {
