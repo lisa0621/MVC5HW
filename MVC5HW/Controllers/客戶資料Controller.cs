@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using MVC5HW.Models;
 using System.Data.Entity.Validation;
+using MVC5HW.ActionFilters;
 
 namespace MVC5HW.Controllers
 {
@@ -18,6 +19,7 @@ namespace MVC5HW.Controllers
         客戶聯絡人Repository repoContact = RepositoryHelper.Get客戶聯絡人Repository();
 
         // GET: 客戶資料
+        [TimeFilterAttribute]
         public ActionResult Index(string search, string customType)
         {
            
