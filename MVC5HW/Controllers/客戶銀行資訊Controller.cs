@@ -163,6 +163,7 @@ namespace MVC5HW.Controllers
         public FileResult NPOIdownload()
         {
             var data = repo.All().AsQueryable();
+            data = data.Where(p => p.是否已刪除 == false);
 
             var workbook = new HSSFWorkbook();
             var sheet = workbook.CreateSheet("客戶銀行資訊");

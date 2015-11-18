@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVC5HW.Models;
+using NPOI.HSSF.UserModel;
+using System.IO;
 
 namespace MVC5HW.Controllers
 {
@@ -219,6 +221,41 @@ namespace MVC5HW.Controllers
             //db.SaveChanges();
             repo.UnitOfWork.Commit();
             return RedirectToAction("Index");
+        }
+
+        public FileResult NPOIdownload()
+        {
+            var data = repo.All().AsQueryable();
+            data = data.Where(p => p.是否已刪除 == false);
+
+            var workbook = new HSSFWorkbook();
+            var sheet = workbook.CreateSheet("客戶聯絡人");
+            var headerRow = sheet.CreateRow(0);
+            headerRow.CreateCell(0).SetCellValue("Id");
+            headerRow.CreateCell(1).SetCellValue("客戶Id");
+            headerRow.CreateCell(2).SetCellValue("職稱");
+            headerRow.CreateCell(3).SetCellValue("姓名");
+            headerRow.CreateCell(4).SetCellValue("Email");
+            headerRow.CreateCell(5).SetCellValue("手機");
+            headerRow.CreateCell(6).SetCellValue("電話");
+            sheet.CreateFreezePane(0, 1, 0, 1);
+
+            int rowNumber = 1;
+            foreach (var datarow in data)
+            {
+                var row = sheet.CreateRow(rowNumber++);
+                row.CreateCell(0).SetCellValue(datarow.Id);
+                row.CreateCell(1).SetCellValue(datarow.客戶Id);
+                row.CreateCell(2).SetCellValue(datarow.職稱);
+                row.CreateCell(3).SetCellValue(datarow.姓名);
+                row.CreateCell(4).SetCellValue(datarow.Email);
+                row.CreateCell(5).SetCellValue(datarow.手機);
+                row.CreateCell(6).SetCellValue(datarow.電話);
+            }
+
+            MemoryStream output = new MemoryStream();
+            workbook.Write(output);
+            return File(output.ToArray(), "application/vnd.ms-excel", "客戶聯絡人.xls");
         }
 
         protected override void Dispose(bool disposing)
