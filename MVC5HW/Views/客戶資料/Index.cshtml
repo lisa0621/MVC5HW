@@ -24,25 +24,32 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.客戶名稱)
+            @Html.ActionLink("客戶名稱", "Index", new { sortOrder = ViewBag.客戶名稱SortParm })
+            @*@Html.DisplayNameFor(model => model.客戶名稱)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.客戶分類)
+            @Html.ActionLink("客戶分類", "Index", new { sortOrder = ViewBag.客戶分類SortParm })
+            @*@Html.DisplayNameFor(model => model.客戶分類)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.統一編號)
+            @Html.ActionLink("統一編號", "Index", new { sortOrder = ViewBag.統一編號SortParm })
+            @*@Html.DisplayNameFor(model => model.統一編號)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.電話)
+            @Html.ActionLink("電話", "Index", new { sortOrder = ViewBag.電話SortParm })
+            @*@Html.DisplayNameFor(model => model.電話)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.傳真)
+            @Html.ActionLink("傳真", "Index", new { sortOrder = ViewBag.傳真SortParm })
+            @*@Html.DisplayNameFor(model => model.傳真)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.地址)
+            @Html.ActionLink("地址", "Index", new { sortOrder = ViewBag.地址SortParm })
+            @*@Html.DisplayNameFor(model => model.地址)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.ActionLink("Email", "Index", new { sortOrder = ViewBag.EmailSortParm })
+            @*@Html.DisplayNameFor(model => model.Email)*@
         </th>
         <th></th>
     </tr>

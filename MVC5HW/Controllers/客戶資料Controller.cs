@@ -21,7 +21,7 @@ namespace MVC5HW.Controllers
 
         // GET: 客戶資料
         [TimeFilterAttribute]
-        public ActionResult Index(string search, string customType, int? page)
+        public ActionResult Index(string search, string customType, int? page, string sortOrder)
         {
            
             //var data = db.客戶資料.AsQueryable();
@@ -43,8 +43,63 @@ namespace MVC5HW.Controllers
                 data = data.Where(p => p.客戶分類==customType);
             }
 
+            ViewBag.客戶名稱SortParm = String.IsNullOrEmpty(sortOrder) ? "客戶名稱_desc" : "";
+            ViewBag.客戶分類SortParm = sortOrder == "客戶分類" ? "客戶分類_desc" : "客戶分類";
+            ViewBag.統一編號SortParm = sortOrder == "統一編號" ? "統一編號_desc" : "統一編號";
+            ViewBag.電話SortParm = sortOrder == "電話" ? "電話_desc" : "電話";
+            ViewBag.傳真SortParm = sortOrder == "傳真" ? "傳真_desc" : "傳真";
+            ViewBag.地址SortParm = sortOrder == "地址" ? "地址_desc" : "地址";
+            ViewBag.EmailSortParm = sortOrder == "Email" ? "Email_desc" : "Email";
+
+            switch (sortOrder)
+            {
+                case "客戶名稱_desc":
+                    data = data.OrderByDescending(s => s.客戶名稱);
+                    break;
+                case "客戶分類":
+                    data = data.OrderBy(s => s.客戶分類);
+                    break;
+                case "客戶分類_desc":
+                    data = data.OrderByDescending(s => s.客戶分類);
+                    break;
+                case "統一編號":
+                    data = data.OrderBy(s => s.統一編號);
+                    break;
+                case "統一編號_desc":
+                    data = data.OrderByDescending(s => s.統一編號);
+                    break;
+                case "電話":
+                    data = data.OrderBy(s => s.電話);
+                    break;
+                case "電話_desc":
+                    data = data.OrderByDescending(s => s.電話);
+                    break;
+                case "傳真":
+                    data = data.OrderBy(s => s.傳真);
+                    break;
+                case "傳真_desc":
+                    data = data.OrderByDescending(s => s.傳真);
+                    break;
+                case "地址":
+                    data = data.OrderBy(s => s.地址);
+                    break;
+                case "地址_desc":
+                    data = data.OrderByDescending(s => s.地址);
+                    break;
+                case "Email":
+                    data = data.OrderBy(s => s.Email);
+                    break;
+                case "Email_desc":
+                    data = data.OrderByDescending(s => s.Email);
+                    break;
+                default:
+                    data = data.OrderBy(s => s.客戶名稱);
+                    break;
+            }
+
+
             var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
-            IPagedList<客戶資料> onePageOfdata = data.OrderBy(x => x.Id).ToPagedList(pageNumber, 5);
+            IPagedList<客戶資料> onePageOfdata = data.ToPagedList(pageNumber, 5);
             return View(onePageOfdata);
         }
 
