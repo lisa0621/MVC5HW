@@ -10,6 +10,8 @@ using MVC5HW.Models;
 using System.Data.Entity.Validation;
 using MVC5HW.ActionFilters;
 using PagedList;
+using NPOI.HSSF.UserModel;
+using System.IO;
 
 namespace MVC5HW.Controllers
 {
@@ -258,6 +260,44 @@ namespace MVC5HW.Controllers
             var data = db.客戶資料.Take(2).ToList();
 
             return Json(data);
+        }
+
+
+        public FileResult NPOIdownload()
+        {
+            var data = repo.All().AsQueryable();
+            data = data.Where(p => p.是否已刪除 == false);
+
+            var workbook = new HSSFWorkbook();
+            var sheet = workbook.CreateSheet("客戶資料");
+            var headerRow = sheet.CreateRow(0);
+            headerRow.CreateCell(0).SetCellValue("Id");
+            headerRow.CreateCell(1).SetCellValue("客戶名稱 ");
+            headerRow.CreateCell(2).SetCellValue("統一編號");
+            headerRow.CreateCell(3).SetCellValue("電話");
+            headerRow.CreateCell(4).SetCellValue("傳真");
+            headerRow.CreateCell(5).SetCellValue("地址");
+            headerRow.CreateCell(6).SetCellValue("Email");
+            headerRow.CreateCell(7).SetCellValue("客戶分類");
+            sheet.CreateFreezePane(0, 1, 0, 1);
+
+            int rowNumber = 1;
+            foreach (var datarow in data)
+            {
+                var row = sheet.CreateRow(rowNumber++);
+                row.CreateCell(0).SetCellValue(datarow.Id);
+                row.CreateCell(1).SetCellValue(datarow.客戶名稱);
+                row.CreateCell(2).SetCellValue(datarow.統一編號);
+                row.CreateCell(3).SetCellValue(datarow.電話);
+                row.CreateCell(4).SetCellValue(datarow.傳真);
+                row.CreateCell(5).SetCellValue(datarow.地址);
+                row.CreateCell(6).SetCellValue(datarow.Email);
+                row.CreateCell(7).SetCellValue(datarow.客戶分類);
+            }
+
+            MemoryStream output = new MemoryStream();
+            workbook.Write(output);
+            return File(output.ToArray(), "application/vnd.ms-excel", "客戶資料.xls");
         }
 
         protected override void Dispose(bool disposing)
