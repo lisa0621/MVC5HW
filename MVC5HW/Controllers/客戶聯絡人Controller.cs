@@ -16,16 +16,24 @@ namespace MVC5HW.Controllers
         客戶聯絡人Repository repo = RepositoryHelper.Get客戶聯絡人Repository();
         // GET: 客戶聯絡人
 
-        public ActionResult Index(string search)
+        public ActionResult Index(string search, string jobType)
         {
             //var data = db.客戶聯絡人.Include(客 => 客.客戶資料).AsQueryable();
             var data = repo.All ().Include(客 => 客.客戶資料).AsQueryable();
 
             data = data.Where(p => p.是否已刪除 == false);
 
+            var jobTypes = repo.All().Where(p => p.是否已刪除 == false).GroupBy(x => x.職稱).Select(g => g.FirstOrDefault());
+            ViewBag.職稱 = new SelectList(jobTypes, "職稱", "職稱");
+
             if (!String.IsNullOrEmpty(search))
             {
                 data = data.Where(p => p.姓名.Contains(search));
+            }
+
+            if (!String.IsNullOrEmpty(jobType))
+            {
+                data = data.Where(p => p.職稱 == jobType);
             }
 
             return View(data);

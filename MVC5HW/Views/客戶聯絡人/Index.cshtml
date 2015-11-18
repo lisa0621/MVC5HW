@@ -13,6 +13,8 @@
 @using (Html.BeginForm())
 {
     <input type="search" name="search" value="" placeholder="請輸入關鍵字" />
+    <text>職稱:</text>
+    @Html.DropDownList("jobType", (IEnumerable<SelectListItem>)ViewBag.職稱, "全部")
     <input type="submit" value="搜尋" />
 }
 
