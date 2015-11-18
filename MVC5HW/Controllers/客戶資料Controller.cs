@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using MVC5HW.Models;
 using System.Data.Entity.Validation;
 using MVC5HW.ActionFilters;
+using PagedList;
 
 namespace MVC5HW.Controllers
 {
@@ -20,7 +21,7 @@ namespace MVC5HW.Controllers
 
         // GET: 客戶資料
         [TimeFilterAttribute]
-        public ActionResult Index(string search, string customType)
+        public ActionResult Index(string search, string customType, int? page)
         {
            
             //var data = db.客戶資料.AsQueryable();
@@ -42,7 +43,9 @@ namespace MVC5HW.Controllers
                 data = data.Where(p => p.客戶分類==customType);
             }
 
-            return View(data);
+            var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
+            IPagedList<客戶資料> onePageOfdata = data.OrderBy(x => x.Id).ToPagedList(pageNumber, 5);
+            return View(onePageOfdata);
         }
 
         // GET: 客戶相關資料數量
