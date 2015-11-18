@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVC5HW.Models;
+using NPOI.HSSF.UserModel;
+using System.IO;
 
 namespace MVC5HW.Controllers
 {
@@ -155,6 +157,41 @@ namespace MVC5HW.Controllers
             //db.SaveChanges();
             repo.UnitOfWork.Commit();
             return RedirectToAction("Index");
+        }
+
+
+        public FileResult NPOIdownload()
+        {
+            var data = repo.All().AsQueryable();
+
+            var workbook = new HSSFWorkbook();
+            var sheet = workbook.CreateSheet("客戶銀行資訊");
+            var headerRow = sheet.CreateRow(0);
+            headerRow.CreateCell(0).SetCellValue("Id");
+            headerRow.CreateCell(1).SetCellValue("客戶Id");
+            headerRow.CreateCell(2).SetCellValue("銀行名稱");
+            headerRow.CreateCell(3).SetCellValue("銀行代碼");
+            headerRow.CreateCell(4).SetCellValue("分行代碼");
+            headerRow.CreateCell(5).SetCellValue("帳戶名稱");
+            headerRow.CreateCell(6).SetCellValue("帳戶號碼");
+            sheet.CreateFreezePane(0, 1, 0, 1);
+
+            int rowNumber = 1;
+            foreach (var datarow in data)
+            {
+                var row = sheet.CreateRow(rowNumber++);
+                row.CreateCell(0).SetCellValue(datarow.Id);
+                row.CreateCell(1).SetCellValue(datarow.客戶Id);
+                row.CreateCell(2).SetCellValue(datarow.銀行名稱);
+                row.CreateCell(3).SetCellValue(datarow.銀行代碼);
+                row.CreateCell(4).SetCellValue((double)datarow.分行代碼);
+                row.CreateCell(5).SetCellValue(datarow.帳戶名稱);
+                row.CreateCell(6).SetCellValue(datarow.帳戶號碼);
+            }
+
+            MemoryStream output = new MemoryStream();
+            workbook.Write(output);
+            return File(output.ToArray(), "application/vnd.ms-excel", "客戶銀行資訊.xls");
         }
 
         protected override void Dispose(bool disposing)
