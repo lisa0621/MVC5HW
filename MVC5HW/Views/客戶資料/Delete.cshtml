@@ -3,7 +3,10 @@
 @{
     ViewBag.Title = "Delete";
 }
-
+@section breadcrumb{
+    <li><a href="@Url.Action("Index", "客戶資料")">客戶資料</a></li>
+    <li><a href="#">Delete</a></li>
+}
 <h2>Delete</h2>
 
 <h3>Are you sure you want to delete this?</h3>

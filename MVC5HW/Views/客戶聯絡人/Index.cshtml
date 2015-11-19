@@ -3,7 +3,13 @@
 @{
     ViewBag.Title = "Index";
 }
-
+@section breadcrumb{
+    <li><a href="@Url.Action("Index", "客戶聯絡人")">客戶聯絡人</a></li>
+    <li>
+        <a href="#">Index
+        </a>
+    </li>
+}
 <h2>Index</h2>
 
 <p>

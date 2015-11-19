@@ -1139,7 +1139,8 @@ function LoadAjaxContent(url){
 		mimeType: 'text/html; charset=utf-8', // ! Need set mimeType only when run from local file
 		url: url,
 		type: 'GET',
-		success: function(data) {
+		success: function (data) {
+		    $('#mvc-content').remove();
 			$('#ajax-content').html(data);
 			$('.preloader').hide();
 		},
@@ -1150,7 +1151,7 @@ function LoadAjaxContent(url){
 		async: false
 	});
 }
-//
+
 //  Function maked all .box selector is draggable, to disable for concrete element add class .no-drop
 //
 function WinMove(){
@@ -3354,11 +3355,14 @@ $(document).ready(function () {
 		$('div#main').toggleClass('sidebar-show');
 		setTimeout(MessagesMenuWidth, 250);
 	});
+	
 	var ajax_url = location.hash.replace(/^#/, '');
 	if (ajax_url.length < 1) {
-		ajax_url = 'ajax/dashboard.html';
+	    //ajax_url = 'ajax/dashboard.html';
 	}
-	LoadAjaxContent(ajax_url);
+	else {
+	    LoadAjaxContent(ajax_url);
+	}
 	var item = $('.main-menu li a[href$="' + ajax_url + '"]');
 	item.addClass('active-parent active');
 	$('.dropdown:has(li:has(a.active)) > a').addClass('active-parent active');
@@ -3401,6 +3405,7 @@ $(document).ready(function () {
 			}
 			var url = $(this).attr('href');
 			window.location.hash = url;
+		    location.pathname = "";
 			LoadAjaxContent(url);
 		}
 		if ($(this).attr('href') == '#') {

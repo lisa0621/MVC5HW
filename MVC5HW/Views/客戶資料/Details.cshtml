@@ -5,6 +5,10 @@
     var customers = Model.contacts.ToArray();
     var data = Model.contacts.ToArray();
 }
+@section breadcrumb{
+    <li><a href="@Url.Action("Index", "客戶資料")">客戶資料</a></li>
+    <li><a href="#">Details</a></li>
+}
 
 <h2>Details</h2>
 
