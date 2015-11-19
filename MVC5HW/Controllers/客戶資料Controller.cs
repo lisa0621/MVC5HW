@@ -127,7 +127,7 @@ namespace MVC5HW.Controllers
             }
             //return View(客戶資料);
 
-            var contactsData = repoContact.All().Where(p => p.客戶Id == id);
+            var contactsData = repoContact.All().Where(p => p.客戶Id == id && p.是否已刪除 == false);
 
             CustomDetailWithContact data = new CustomDetailWithContact
             {
@@ -141,10 +141,20 @@ namespace MVC5HW.Controllers
         [HttpPost]
         public ActionResult Details(FormCollection form)
         {
+
             IList<客戶聯絡人> data = new List<客戶聯絡人>();
+
             if (TryUpdateModel<IList<客戶聯絡人>>(data, "data"))
             {
             }
+            //    foreach (var item in data)
+            //{
+            //    Console.WriteLine(item.姓名);
+            //}
+            //IList<客戶聯絡人> data = new List<客戶聯絡人>();
+            //if (TryUpdateModel<IList<客戶聯絡人>>(data, "data"))
+            //{
+            //}
                 return View();
         }
 
