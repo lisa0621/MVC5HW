@@ -12,6 +12,7 @@ using MVC5HW.ActionFilters;
 using PagedList;
 using NPOI.HSSF.UserModel;
 using System.IO;
+using Omu.ValueInjecter;
 
 namespace MVC5HW.Controllers
 {
@@ -139,23 +140,25 @@ namespace MVC5HW.Controllers
         }
 
         [HttpPost]
-        public ActionResult Details(FormCollection form)
+        public ActionResult Details()
         {
 
-            IList<客戶聯絡人> data = new List<客戶聯絡人>();
-
-            if (TryUpdateModel<IList<客戶聯絡人>>(data, "data"))
+            IList<ContactViewModel> data = new List<ContactViewModel>();
+            var includeProperties = "Id,職稱,手機,電話".Split(',');
+            TryUpdateModel<IList<ContactViewModel>>(data, "data", includeProperties);
+            
+            if (data != null)
             {
+                foreach (var item in data)
+                {
+                    var dbItem = repoContact.GetByID(item.Id);
+
+                    dbItem.InjectFrom(item);
+                }
             }
-            //    foreach (var item in data)
-            //{
-            //    Console.WriteLine(item.姓名);
-            //}
-            //IList<客戶聯絡人> data = new List<客戶聯絡人>();
-            //if (TryUpdateModel<IList<客戶聯絡人>>(data, "data"))
-            //{
-            //}
-                return View();
+            repoContact.UnitOfWork.Commit();
+            
+            return RedirectToAction("Index");
         }
 
         // GET: 客戶資料/Create

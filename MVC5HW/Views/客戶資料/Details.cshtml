@@ -107,10 +107,10 @@
                 @Html.TextBoxFor(modelItem => data[i].職稱, new { id = "data_" + i + "__職稱", Name = "data[" + i + "].職稱" })
             </td>
             <td>
-                @Html.TextBoxFor(modelItem => data[i].姓名, new { id = "data_" + i + "__姓名", Name = "data[" + i + "].姓名" })
+                @Html.DisplayFor(modelItem => data[i].姓名, new { id = "data_" + i + "__姓名", Name = "data[" + i + "].姓名" })
             </td>
             <td>
-                @Html.TextBoxFor(modelItem => data[i].Email, new { id = "data_" + i + "__Email", Name = "data[" + i + "].Email" })
+                @Html.DisplayFor(modelItem => data[i].Email, new { id = "data_" + i + "__Email", Name = "data[" + i + "].Email" })
             </td>
             <td>
                 @Html.TextBoxFor(modelItem => data[i].手機, new { id = "data_" + i + "__手機", Name = "data[" + i + "].手機" })
@@ -119,7 +119,7 @@
                 @Html.TextBoxFor(modelItem => data[i].電話, new { id = "data_" + i + "__電話", Name = "data[" + i + "].電話" })
             </td>
             <td>
-                @Html.TextBoxFor(modelItem => data[i].客戶資料.客戶名稱, new { id = "data_" + i + "__客戶資料.客戶名稱", Name = "data[" + i + "].客戶資料.客戶名稱" })
+                @Html.DisplayFor(modelItem => data[i].客戶資料.客戶名稱, new { id = "data_" + i + "__客戶資料.客戶名稱", Name = "data[" + i + "].客戶資料.客戶名稱" })
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = data[i].Id }) |
@@ -144,7 +144,8 @@
 }
 
 
-    <table class="table">
+    @*
+        <table class="table">
         <tr>
             <th>
                 職稱
@@ -159,7 +160,7 @@
                 手機
             </th>
             <th>
-               電話
+                電話
             </th>
             <th></th>
         </tr>
@@ -185,14 +186,17 @@
                     @Html.TextBoxFor(modelItem => customers[i].電話)
                 </td>
                 <td>
-                    @*@Html.ActionLink("Edit", "Edit", new { id = customers[i].Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = customers[i].Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = customers[i].Id })*@
+                    @Html.ActionLink("Edit", "Edit", new { id = customers[i].Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = customers[i].Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = customers[i].Id })
                 </td>
             </tr>
         }
 
     </table>
+*@
+
+
 
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = custom.Id }) |
