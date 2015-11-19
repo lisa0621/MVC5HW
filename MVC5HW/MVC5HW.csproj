@@ -315,6 +315,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="index.html" />
+    <Content Include="index_v1.html" />
     <Content Include="Models\Custom.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Custom.edmx</DependentUpon>
@@ -342,6 +344,7 @@
     <Content Include="Models\Custom.edmx.diagram">
       <DependentUpon>Custom.edmx</DependentUpon>
     </Content>
+    <Content Include="COPYING" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -417,6 +420,13 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ajax\" />
+    <Folder Include="css\" />
+    <Folder Include="img\" />
+    <Folder Include="js\" />
+    <Folder Include="plugins\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
