@@ -1,0 +1,75 @@
+﻿@model IEnumerable<客戶聯絡人>
+
+@{ 
+    var data = Model.ToArray();
+}
+
+@using (Html.BeginForm())
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().職稱)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().姓名)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().手機)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().電話)
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => Model.contacts.FirstOrDefault().客戶資料.客戶名稱)*@
+            </th>
+            <th></th>
+        </tr>
+
+        @for (var i = 0; i < data.Length; i++)
+        {
+            <tr>
+                <td>
+                    @Html.HiddenFor(modelItem => data[i].Id, new { id = "data_" + i + "__Id", Name = "data[" + i + "].Id" })
+                    @*@Html.EditorFor(modelItem => data[i].職稱, null, "data[" + i + "].職稱")*@
+                    @Html.TextBoxFor(modelItem => data[i].職稱, new { id = "data_" + i + "__職稱", Name = "data[" + i + "].職稱" })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => data[i].姓名, new { id = "data_" + i + "__姓名", Name = "data[" + i + "].姓名" })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => data[i].Email, new { id = "data_" + i + "__Email", Name = "data[" + i + "].Email" })
+                </td>
+                <td>
+                    @Html.TextBoxFor(modelItem => data[i].手機, new { id = "data_" + i + "__手機", Name = "data[" + i + "].手機" })
+                </td>
+                <td>
+                    @Html.TextBoxFor(modelItem => data[i].電話, new { id = "data_" + i + "__電話", Name = "data[" + i + "].電話" })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => data[i].客戶資料.客戶名稱, new { id = "data_" + i + "__客戶資料.客戶名稱", Name = "data[" + i + "].客戶資料.客戶名稱" })
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = data[i].Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = data[i].Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = data[i].Id })
+                </td>
+            </tr>
+        }
+
+        <tr>
+            <td><button type="submit">批次作業</button></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+    </table>
+
+}

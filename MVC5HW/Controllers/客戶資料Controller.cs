@@ -161,6 +161,13 @@ namespace MVC5HW.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult _DetailContact(int id)
+        {
+            var contactsData = repoContact.All().Where(p => p.客戶Id == id && p.是否已刪除 == false);
+            
+            return PartialView(contactsData);
+        }
+
         // GET: 客戶資料/Create
         public ActionResult Create()
         {

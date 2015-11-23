@@ -1035,6 +1035,7 @@
     <Content Include="Views\客戶資料\Counts.cshtml" />
     <Content Include="Views\客戶資料\JsonIndex.cshtml" />
     <Content Include="Views\Shared\Error_DbEntityValidationException.cshtml" />
+    <Content Include="Views\客戶資料\_DetailContact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
