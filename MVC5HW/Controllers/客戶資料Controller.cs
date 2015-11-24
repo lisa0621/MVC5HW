@@ -234,12 +234,13 @@ namespace MVC5HW.Controllers
         //public ActionResult Edit([Bind(Include = "Id,客戶名稱,客戶分類,統一編號,電話,傳真,地址,Email")] 客戶資料 客戶資料)
         public ActionResult Edit(int? id, FormCollection form)
         {
-            throw new DbEntityValidationException();
+            //throw new DbEntityValidationException();
 
             客戶資料 客戶資料 = repo.GetByID(id);
-            var includeProperties = "Id,客戶名稱,客戶分類,統一編號,電話,傳真,地址,Email".Split(',');
-            if (TryUpdateModel<客戶資料>(客戶資料, includeProperties))
+            var includeProperties = "Id,客戶名稱,客戶分類,統一編號,電話,傳真,地址,Email,帳號,密碼,lat,lng".Split(',');
+            if(TryUpdateModel<客戶資料>(客戶資料, includeProperties))
             {
+                客戶資料.密碼 = sha256_hash(客戶資料.密碼);
                 repo.UnitOfWork.Commit();
                 return RedirectToAction("Index");
             }

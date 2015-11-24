@@ -92,7 +92,9 @@
 @*@Html.Partial("_DetailContact", Model.contacts)*@
 @Html.Action("_DetailContact", new { id = custom.Id})
 
-
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
 
 
 

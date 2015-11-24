@@ -359,6 +359,7 @@
     <Content Include="index.html" />
     <Content Include="index_v1.html" />
     <Content Include="js\devoops.js" />
+    <Content Include="js\maps.js" />
     <Content Include="Models\Custom.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Custom.edmx</DependentUpon>
@@ -1040,6 +1041,7 @@
     <Content Include="Views\客戶資料\_DetailContact.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\map.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\maps.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -1055,7 +1057,6 @@
   <ItemGroup>
     <Folder Include="css\" />
     <Folder Include="img\" />
-    <Folder Include="Views\Shared\EditorTemplates\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
