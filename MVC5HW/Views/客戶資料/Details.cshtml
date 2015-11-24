@@ -1,5 +1,6 @@
 ﻿@model CustomDetailWithContact
 @{
+    Layout = null;
     ViewBag.Title = "Details";
     var custom = Model.custom;
     var customers = Model.contacts.ToArray();
@@ -9,7 +10,6 @@
     <li><a href="@Url.Action("Index", "客戶資料")">客戶資料</a></li>
     <li><a href="#">Details</a></li>
 }
-
 
 
 <h2>Details</h2>
@@ -86,29 +86,13 @@
 </div>
 
 
-@*@Html.DisplayFor(m => m.custom, "map")*@
-
+@Html.DisplayFor(m => m.custom, "map")
+<br/>
+<br/>
 @*@Html.Partial("_DetailContact", Model.contacts)*@
-@*@Html.Action("_DetailContact", new { id = custom.Id})*@
-
-<div id="map" style="width:80%; height:80%"></div>
+@Html.Action("_DetailContact", new { id = custom.Id})
 
 
-@section Scripts {
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2s4YPihahyCr2rIGZ97-dUQllkEgb-vU&callback=initMap"
-            async defer></script>
-    <script>
-        var map;
-        function initMap() {
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: { lat: 25.043654, lng: 121.526061 },
-            zoom: 8
-            });
-        }
-    </script>
-
-}
 
 
 
