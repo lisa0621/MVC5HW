@@ -13,6 +13,8 @@ using PagedList;
 using NPOI.HSSF.UserModel;
 using System.IO;
 using Omu.ValueInjecter;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace MVC5HW.Controllers
 {
@@ -179,12 +181,15 @@ namespace MVC5HW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,客戶名稱,客戶分類,統一編號,電話,傳真,地址,Email")] 客戶資料 客戶資料)
+        public ActionResult Create([Bind(Include = "Id,客戶名稱,客戶分類,統一編號,電話,傳真,地址,Email,帳號,密碼")] 客戶資料 客戶資料)
         {
             if (ModelState.IsValid)
             {
                 //db.客戶資料.Add(客戶資料);
                 //db.SaveChanges();
+
+                客戶資料.密碼 = sha256_hash(客戶資料.密碼);
+
 
                 repo.Add(客戶資料);
                 repo.UnitOfWork.Commit();
@@ -192,6 +197,16 @@ namespace MVC5HW.Controllers
             }
 
             return View(客戶資料);
+        }
+
+        public static String sha256_hash(String value)
+        {
+            using (SHA256 hash = SHA256Managed.Create())
+            {
+                return String.Join("", hash
+                  .ComputeHash(Encoding.UTF8.GetBytes(value))
+                  .Select(item => item.ToString("x2")));
+            }
         }
 
         // GET: 客戶資料/Edit/5

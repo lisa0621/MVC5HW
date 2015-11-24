@@ -1,0 +1,21 @@
+﻿@model 客戶資料
+@{
+    var map =""; 
+}
+<img src="@map" alt="" width="500" />
+<div id="map" style="width:80%; height:80%"></div>
+<p>Google Maps</p>
+
+@section scripts{
+<script>
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: @Model.lat, lng: @Model.lng},
+        zoom: 8
+        });
+    }
+
+</script>
+
+}

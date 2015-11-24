@@ -1,0 +1,25 @@
+﻿@model LoginVM
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+<div>
+    @*如果↓表單的ReturnUrl沒給的話，就沒辦法導向使用者原先要求的頁面*@
+    @using (Html.BeginForm("Login", "Home", new { ReturnUrl = Model.ReturnUrl }, FormMethod.Post, new { autocomplete = "off" }))
+    {
+        @:帳號：
+        @Html.TextBoxFor(m => m.帳號) @Html.ValidationMessageFor(m => m.帳號)
+        <br />
+        @:密碼：
+        @Html.PasswordFor(m => m.密碼) @Html.ValidationMessageFor(m => m.密碼)
+        <br />
+
+        <input type="submit" value="登入" />
+
+    }
+</div>
+
+
+
